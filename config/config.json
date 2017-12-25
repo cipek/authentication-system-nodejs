@@ -1,0 +1,7 @@
+{ 
+ "name" : "yourName",
+ "email" : "yourEmail",
+ "password" : "passToEmail",
+ "secret" : "secretKeyForToken",
+ "db" : "yourDB"
+}

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title>API</title>
+	
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+		<link rel="stylesheet" href="style.css">
+
+		<style type="text/css">
+			body {background-color: #eceeef}
+			.apiroute {color: dodgerblue}
+		</style>
+
+		<script src="jquery-3.2.1.min.js"></script>
+	
+	</head>
+
+	<body>
+		<div class="jumbotron jumbotron">
+		  	<h1 class="display-3">API Documentation</h1>
+		  	<hr class="my-4">
+
+			<div class="list-group">
+
+			
+			<h2>Users</h2>
+
+				<span onclick="wrap(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 apiroute">/api/v1/users/login</h5>
+						<small>(POST)</small>
+					</div>
+					<p class="mb-1">Login user into the system</p>
+					<i id="arrow" class="down"></i>
+					<div id="myDIV" class="info" style="width: 100%;">
+						<div class="messages">
+							<div class="left">
+								<h5>Requests</h5>
+								<br>
+								<h6>Headers:</h6>
+								<p>- credencials- encoded to Base64 in form: "email + ":" + password"</p>
+								<p>Java example:</p>
+								<p>String credentials = email + ":" + password;<br>
+        						String basic = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);</p>
+							</div>
+							<div class="right">
+								<h5>Response</h5>
+								<br>
+								<h6>Body:</h6>
+								<p>- token</p>
+								<p>- refresh_token</p>
+							</div>
+						</div>
+						<div class="codes">
+							<br>
+							<h5>Response codes</h5>
+								<p><b>200: </b>Logged in</p>
+								<p><b>400: </b>Invalid Request ! - wrong data in the header</p>
+								<p><b>401: </b>Wrong Password !</p>
+								<p><b>404: </b>User Not Found ! - user does not exist in DB- hasn't created the account yet</p>
+								<p><b>500: </b>Internal Server Error ! - most porbably issue with the server</p>
+
+						</div>
+					</div>
+				</span>
+
+
+
+				<span onclick="wrap(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 apiroute">/api/v1/users/relogin</h5>
+						<small>(POST)</small>
+					</div>
+					<p class="mb-1">Relogin user into the system.</p>
+					<i id="arrow" class="down"></i>
+					<div id="myDIV" class="info" style="width: 100%;">
+						<div class="messages">
+							<div class="left">
+								<h5>Requests</h5>
+								<br>
+								<h6>Headers:</h6>
+								<p>- x-access-token</p>
+								<p>- refresh_token</p>
+								<p>- email</p>
+							</div>
+							<div class="right">
+								<h5>Response</h5>
+								<br>
+								<h6>Body:</h6>
+								<p>- token (optional)</p>
+							</div>
+						</div>
+						<div class="codes">
+							<br>
+							<h5>Response codes</h5>
+								<p><b>200: </b>Correct token</p>
+								<p><b>203: </b>Succesful logged in and sends back new <b>token</b></p>
+								<p><b>400: </b>Invalid Request ! - wrong data in the header</p>
+								<p><b>403: </b>Wrong refresh token !</p>
+								<p><b>404: </b>User Not Found ! - user does not exist in DB- hasn't created the account yet</p>
+								<p><b>405: </b>Invalid Credentials ! - wrong header data- one of the tokens is missed</p>
+								<p><b>500: </b>Internal Server Error ! - most porbably issue with the server</p>
+						</div>
+					</div>
+				</span>
+
+
+				
+				<span onclick="wrap(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 apiroute">/api/v1/users/signup</h5>
+						<small>(POST)</small>
+					</div>
+					<p class="mb-1">Sign up user to the system.</p>
+					<i id="arrow" class="down"></i>
+					<div id="myDIV" class="info" style="width: 100%;">
+						<div class="messages">
+							<div class="left">
+								<h5>Requests</h5>
+								<br>
+								<h6>Body:</h6>
+								<p>- name</p>
+								<p>- email</p>
+								<p>- password</p>
+							</div>
+							<div class="right">
+								<h5>Response</h5>
+							</div>
+						</div>
+						<div class="codes">
+							<br>
+							<h5>Response codes</h5>
+								<p><b>201: </b>User Registered Sucessfully !</p>
+								<p><b>400: </b>Invalid Request ! - wrong data in the body</p>
+								<p><b>409: </b>User Already Registered !</p>
+								<p><b>500: </b>Internal Server Error ! - most porbably issue with the server</p>
+
+						</div>
+					</div>
+				</span>
+
+
+				
+				<span onclick="wrap(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 apiroute">/api/v1/users/checkEmail/:email</h5>
+						<small>(POST)</small>
+					</div>
+					<p class="mb-1">Check if user has already registered.</p>
+					<i id="arrow" class="down"></i>
+					<div id="myDIV" class="info" style="width: 100%;">
+						<div class="messages">
+							<div class="left">
+								<h5>Requests</h5>
+							</div>
+							<div class="right">
+								<h5>Response</h5>
+								<br>
+								<h6>Body:</h6>
+								<p>- isAvailable (true/false)</p>
+							</div>
+						</div>
+						<div class="codes">
+							<br>
+							<h5>Response codes</h5>
+								<p><b>200: </b>User not registered yet- true</p>
+								<p><b>201: </b>User already registered !- false</p>
+								<p><b>500: </b>Internal Server Error ! - most porbably issue with the server</p>
+						</div>
+					</div>
+				</span>
+
+
+				<span onclick="wrap(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 apiroute">/api/v1/users/:email</h5>
+						<small>(GET)</small>
+					</div>
+					<p class="mb-1">Get the user profile details.</p>
+					<i id="arrow" class="down"></i>
+					<div id="myDIV" class="info" style="width: 100%;">
+						<div class="messages">
+							<div class="left">
+								<h5>Requests</h5>
+								<br>
+								<h6>Headers:</h6>
+								<p>- x-access-token</p>
+								<p>- refresh_token</p>
+								<p>- email</p>
+							</div>
+							<div class="right">
+								<h5>Response</h5>
+								<br>
+								<h6>Body:</h6>
+								<p>- name</p>
+								<br>
+								<p>- token (optional)</p>
+							</div>
+						</div>
+						<div class="codes">
+							<br>
+							<h5>Response codes</h5>
+								<p><b>200: </b>Correct token</p>
+								<p><b>203: </b>Succesful logged in and sends back new <b>token</b></p>
+								<p><b>400: </b>Invalid Request ! - wrong data in the header</p>
+								<p><b>403: </b>Wrong refresh token !</p>
+								<p><b>404: </b>User Not Found ! - user does not exist in DB- hasn't created the account yet</p>
+								<p><b>405: </b>Invalid Credentials ! - wrong header data- one of the tokens is missed</p>
+								<p><b>500: </b>Internal Server Error ! - most probably issue with the server</p>
+
+						</div>
+					</div>
+				</span>
+
+
+				<span onclick="wrap(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 apiroute">/api/v1/users/:email</h5>
+						<small>(PUT)</small>
+					</div>
+					<p class="mb-1">Changes the password.</p>
+					<i id="arrow" class="down"></i>
+					<div id="myDIV" class="info" style="width: 100%;">
+						<div class="messages">
+							<div class="left">
+								<br>
+								<h6>Headers:</h6>
+								<p>- x-access-token</p>
+								<p>- refresh_token</p>
+								<p>- email</p>
+								<br>
+								<h6>Body:</h6>
+								<p>- password</p>
+								<p>- newPassword</p>
+							</div>
+							<div class="right">
+								<h5>Response</h5>
+								<br>
+								<h6>Body:</h6>
+								<p>- refresh_token</p>
+								<p>- token (optional)</p>
+							</div>
+						</div>
+						<div class="codes">
+							<br>
+							<h5>Response codes</h5>
+								<p><b>200: </b>Password Updated Sucessfully !</p>
+								<p><b>203: </b>Succesful logged in and sends back new <b>token</b></p>
+								<p><b>400: </b>Invalid Request ! - wrong data in the header or body</p>
+								<p><b>401: </b>Invalid Old Password !</p>
+								<p><b>403: </b>Wrong refresh token !</p>
+								<p><b>404: </b>User Not Found ! - user does not exist in DB- hasn't created the account yet</p>
+								<p><b>405: </b>Invalid Credentials ! - wrong header data- one of the tokens is missed</p>
+								<p><b>500: </b>Internal Server Error ! - most porbably issue with the server</p>
+
+						</div>
+					</div>
+				</span>
+
+
+
+				<span onclick="wrap(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 apiroute">/api/v1/users/:email/password</h5>
+						<small>(POST)</small>
+					</div>
+					<p class="mb-1">Initialize process of reseting the password. <b>Notice that request's body changed the bahaviour of the API!</b></p>
+					<i id="arrow" class="down"></i>
+					<div id="myDIV" class="info" style="width: 100%;">
+						<div class="messages">
+							<div class="left">
+								<h5>Requests</h5>
+							</div>
+							<div class="right">
+								<h5>Response</h5>
+							</div>
+						</div>
+						<div class="codes">
+							<br>
+							<h5>Response codes</h5>
+								<p><b>200: </b>Check mail for instructions</p>
+								<p><b>400: </b>Invalid Request ! - wrong data in the header or body</p>
+								<p><b>404: </b>User Not Found ! - user does not exist in DB- hasn't created the account yet</p>
+								<p><b>500: </b>Internal Server Error ! - most porbably issue with the server</p>
+
+						</div>
+					</div>
+				</span>
+
+
+
+				<span onclick="wrap(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 apiroute">/api/v1/users/:email/password</h5>
+						<small>(POST)</small>
+					</div>
+					<p class="mb-1">Finish process of reseting the password. <b>Notice that request's body changed the bahaviour of the API!</b></p>
+					<i id="arrow" class="down"></i>
+					<div id="myDIV" class="info" style="width: 100%;">
+						<div class="messages">
+							<div class="left">
+								<h5>Requests</h5>
+								<br>
+								<h6>Body:</h6>
+								<p>- passowrd (new password)</p>
+								<p>- token</p>
+							</div>
+							<div class="right">
+								<h5>Response</h5>
+							</div>
+						</div>
+						<div class="codes">
+							<br>
+							<h5>Response codes</h5>
+								<p><b>200: </b>Password Changed Successfully !</p>
+								<p><b>401: </b>Invalid Token ! or Time Out ! Try again- the token is not valid any more</p>
+								<p><b>400: </b>Invalid Request ! - wrong data in the header or body</p>
+								<p><b>404: </b>User Not Found ! - user does not exist in DB- hasn't created the account yet</p>
+								<p><b>500: </b>Internal Server Error ! - most porbably issue with the server</p>
+
+						</div>
+					</div>
+				</span>
+
+
+				<span onclick="wrap(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 apiroute">/api/v1/users/edit/:email</h5>
+						<small>(POST)</small>
+					</div>
+					<p class="mb-1">Edit user's data.</p>
+					<i id="arrow" class="down"></i>
+					<div id="myDIV" class="info" style="width: 100%;">
+						<div class="messages">
+							<div class="left">
+								<h5>Requests</h5>
+								<br>
+								<h6>Headers:</h6>
+								<p>- x-access-token</p>
+								<p>- refresh_token</p>
+								<p>- email</p>
+								<br>
+								<h6>Body:</h6>
+								<p>- name</p>
+							</div>
+							<div class="right">
+								<h5>Response</h5>
+								<br>
+								<h6>Body:</h6>
+								<p>- token (optional)</p>
+							</div>
+						</div>
+						<div class="codes">
+							<br>
+							<h5>Response codes</h5>
+								<p><b>201: </b>User Updated Sucessfully !</p>
+								<p><b>203: </b>Succesful edited data and sends back new <b>token</b></p>
+								<p><b>400: </b>Invalid Request ! - wrong data in the body</p>
+								<p><b>403: </b>Wrong refresh token !</p>
+								<p><b>404: </b>User Not Found !</p>
+								<p><b>500: </b>Internal Server Error ! - most porbably issue with the server</p>
+
+						</div>
+					</div>
+				</span>
+
+			</div>
+		</div>
+
+		<!-- Bootstrap -->
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	</body>
+</html>
+
+<script type="text/javascript">
+
+	function wrap(obj){
+		var x = obj.getElementsByClassName('info');
+	   	var y = obj.getElementsByTagName('i');
+
+	    if (x[0].style.display === 'block') {
+			x[0].style.display = 'none';
+
+	        y[0].classList.add('down');
+			y[0].classList.remove('up');
+
+	    } else {
+	        x[0].style.display = 'block';
+
+	        y[0].classList.add('up');
+			y[0].classList.remove('down');
+	    }
+        
+    }
+
+</script>
